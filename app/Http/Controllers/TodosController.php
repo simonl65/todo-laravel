@@ -98,6 +98,7 @@ class TodosController extends Controller
             'completed' => 'required|boolean',
         ]);
 
+        // Bulk update:
         Todo::query()->update($data);
 
         return response('Updated', 200);
@@ -118,6 +119,8 @@ class TodosController extends Controller
     /**
      * Remove the specified resources from storage.
      *
+     * Takes an array of the checked IDs.
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroyCompleted(Request $request)
@@ -125,6 +128,9 @@ class TodosController extends Controller
         $request->validate([
             'todos' => 'required|array'
         ]);
+
+        // Bulk erase all records in the passed todos array:
+        Todo::destroy($request->todos);
 
         return response('Deleted todo items', 200);
     }
