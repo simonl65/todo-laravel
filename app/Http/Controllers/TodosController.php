@@ -120,7 +120,7 @@ class TodosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroyCompleted(Request $request)
     {
         $request->validate([
             'todos' => 'required|array'
